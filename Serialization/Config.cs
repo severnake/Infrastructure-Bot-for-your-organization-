@@ -18,6 +18,5 @@ namespace InfraBot.Serialization
         public List<int> telegram_allowed_users_id_reloadconfig { get; set; }
         public List<int> telegram_allowed_users_id_getcommands { get; set; }
         public List<int> telegram_allowed_users_id_remindme { get; set; }
-        public List<Command> telegram_commands { get; set; }
     }
 }

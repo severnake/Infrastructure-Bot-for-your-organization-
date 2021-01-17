@@ -1,5 +1,5 @@
 {
-    "telegram_bot_token": "Your_Telegram_Token",
+    "telegram_bot_token": "Your_bot_token",
     "telegram_enable_logging": false,
     "telegram_enable_reminder": true,
     "telegram_enable_reloadconfig": true,
@@ -12,6 +12,5 @@
     "telegram_allowed_users_id_emergency": [],
     "telegram_allowed_users_id_reloadconfig": [],
     "telegram_allowed_users_id_getcommands": [],
-    "telegram_allowed_users_id_remindme": [],
-    "telegram_commands": []
+    "telegram_allowed_users_id_remindme": []
 }

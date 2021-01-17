@@ -77,8 +77,8 @@ namespace InfraBot.Core
             }
             finally
             {
-                CommandCenter.config.telegram_commands = LoadPlugins();
-                WriteToPluginsLog($"FileOnChanged. Reload plugins. Found plugins count: " + CommandCenter.config.telegram_commands.Count.ToString());
+                CommandCenter.commands = LoadPlugins();
+                WriteToPluginsLog($"FileOnChanged. Reload plugins. Found plugins count: " + CommandCenter.commands.Count.ToString());
 
                 // Turn back on event triggering
                 watcher.EnableRaisingEvents = true;
@@ -133,8 +133,8 @@ namespace InfraBot.Core
                 WriteToPluginsLog($"FileOnCreated. Can not deploy plugin!");
             }
 
-            CommandCenter.config.telegram_commands = LoadPlugins();
-            WriteToPluginsLog($"FileOnCreated. Reload plugins. Found plugins count: " + CommandCenter.config.telegram_commands.Count.ToString());
+            CommandCenter.commands = LoadPlugins();
+            WriteToPluginsLog($"FileOnCreated. Reload plugins. Found plugins count: " + CommandCenter.commands.Count.ToString());
         }
 
         private static void FileOnDeleted(object source, FileSystemEventArgs e)
@@ -159,8 +159,8 @@ namespace InfraBot.Core
                 return;
             }
 
-            CommandCenter.config.telegram_commands = LoadPlugins();
-            WriteToPluginsLog($"FileOnDeleted. Reload plugins. Found plugins count: " + CommandCenter.config.telegram_commands.Count.ToString());
+            CommandCenter.commands = LoadPlugins();
+            WriteToPluginsLog($"FileOnDeleted. Reload plugins. Found plugins count: " + CommandCenter.commands.Count.ToString());
         }
 
         private static void FileOnRenamed(object source, RenamedEventArgs e)
@@ -213,8 +213,8 @@ namespace InfraBot.Core
                 WriteToPluginsLog($"FileOnRenamed. Can not redeploy plugin with new name!");
             }
 
-            CommandCenter.config.telegram_commands = LoadPlugins();
-            WriteToPluginsLog($"FileOnRenamed. Reload plugins. Found plugins count: " + CommandCenter.config.telegram_commands.Count.ToString());
+            CommandCenter.commands = LoadPlugins();
+            WriteToPluginsLog($"FileOnRenamed. Reload plugins. Found plugins count: " + CommandCenter.commands.Count.ToString());
         }
 
         private static void WaitForDeletion(string directoryName)

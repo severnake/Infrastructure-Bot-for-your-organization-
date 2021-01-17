@@ -17,6 +17,7 @@ namespace InfraBot.Core
         public static Config config;
         static string JsonConfigFileName = "config.json";
         static string JsonConfigFile = "";
+        public static List<Command> commands = new List<Command>();
         static CommandCenter()
         {
             if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + JsonConfigFileName))
@@ -27,7 +28,7 @@ namespace InfraBot.Core
 
             JsonConfigFile = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + JsonConfigFileName);
             config = JsonConvert.DeserializeObject<Config>(JsonConfigFile);
-            config.telegram_commands = PluginsManager.LoadPlugins();
+            commands = PluginsManager.LoadPlugins();
         }
 
         public async Task ExecuteCommand(ITelegramBotClient botClient, object sender, MessageEventArgs e)
@@ -65,7 +66,7 @@ namespace InfraBot.Core
                     return;
                 }
                 string CommandsList = "";
-                foreach (Command command in config.telegram_commands)
+                foreach (Command command in commands)
                 {
                     if (command.command_show_in_get_commands_list == true)
                     {
@@ -99,7 +100,7 @@ namespace InfraBot.Core
                 JsonConfigFile = File.ReadAllText(AppDomain.CurrentDomain.BaseDirectory + "\\" + JsonConfigFileName);
                 config = null;
                 config = JsonConvert.DeserializeObject<Config>(JsonConfigFile);
-                config.telegram_commands = PluginsManager.LoadPlugins();
+                commands = PluginsManager.LoadPlugins();
                 WriteToLog("Somebody with `" + FromUserId.ToString() + "` from chat with id `" + FromChatId.ToString() + "` sent /reloadconfig command!");
                 await botClient.SendTextMessageAsync(
                     chatId: e.Message.Chat,
@@ -195,7 +196,7 @@ namespace InfraBot.Core
                 });
             }*/
 
-            foreach (Command command in config.telegram_commands)
+            foreach (Command command in commands)
             {
                 if (e.Message.Text.ToLower().StartsWith(command.command_starts_with) && ((command.command_allowed_users_id.Count > 0 && command.command_allowed_users_id.Contains(FromUserId)) || command.command_allowed_users_id.Count == 0))
                 {
